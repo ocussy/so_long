@@ -6,7 +6,7 @@
 /*   By: ocussy <ocussy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:20:33 by ocussy            #+#    #+#             */
-/*   Updated: 2024/02/23 12:21:45 by ocussy           ###   ########.fr       */
+/*   Updated: 2024/02/28 18:16:58 by ocussy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,41 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct s_data
+typedef struct s_map
 {
 	int		size_map;
-	int		len_map;
+	size_t	len_map;
 	char	**map;
-}			t_data;
+	char	**filled;
+}			t_map;
 
-// FT_MAP
-int			ft_error(int fd);
+// CHECK_MAP
+
+int			ft_error_map(t_map *tab, int i);
 int			ft_size_map(void);
-int			ft_verif_map(char **tab);
-int			ft_map(void);
 char		*ft_get_map(int size_map);
+int			ft_verif_map(t_map *map);
+int			ft_map(void);
+
+// UTILS
+
+t_map		*ft_init(void);
+int			ft_free_tab(t_map *map);
+char		**ft_copy_array(t_map *map);
+
+// UTILS_MAP
+
+int			ft_verif_wall_verti(char **map, size_t len, int size_map);
+int			ft_verif_wall_horiz(char **map, int size_map);
+int			ft_verif_wall(t_map *map);
+int			ft_verif_char(char **map, char c);
+int			ft_verif_size_wall(t_map *map);
+
+// UTILS_MAP_2
+
+void		fill(t_map *map, int x, size_t y);
+int			ft_check_filled(char **filled);
+int			ft_verif_path(t_map *map);
 
 // GNL
 char		*get_next_line(int fd);

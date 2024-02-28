@@ -2,7 +2,10 @@ NAME = so_long
 SRC_FILES = main.c \
 			get_next_line.c \
 			get_next_line_utils.c \
-			ft_map.c \
+			check_map.c \
+			utils_map.c \
+			utils_map_2.c \
+			utils.c \
 
 OBJECTS = $(patsubst %.c, %.o, $(SRC_FILES))
 INCLUDE = so_long.h
