@@ -6,7 +6,7 @@
 /*   By: ocussy <ocussy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 18:07:12 by ocussy            #+#    #+#             */
-/*   Updated: 2024/02/28 18:08:12 by ocussy           ###   ########.fr       */
+/*   Updated: 2024/03/01 16:05:48 by ocussy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_verif_wall(t_map *map)
 	return (1);
 }
 
-int	ft_verif_char(char **map, char c)
+int	ft_verif_char(t_map *map, char c)
 {
 	int	i;
 	int	j;
@@ -71,12 +71,12 @@ int	ft_verif_char(char **map, char c)
 
 	i = 0;
 	count = 0;
-	while (map[i])
+	while (map->map[i])
 	{
 		j = 0;
-		while (map[i][j])
+		while (map->map[i][j])
 		{
-			if (map[i][j] == c)
+			if (map->map[i][j] == c)
 				count++;
 			j++;
 		}
@@ -86,6 +86,8 @@ int	ft_verif_char(char **map, char c)
 		return (0);
 	if (count == 0 && c == 'C')
 		return (0);
+	if (c == 'C')
+		map->count = count;
 	return (1);
 }
 

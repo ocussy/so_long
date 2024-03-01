@@ -6,7 +6,7 @@
 /*   By: ocussy <ocussy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 18:08:24 by ocussy            #+#    #+#             */
-/*   Updated: 2024/02/28 18:12:18 by ocussy           ###   ########.fr       */
+/*   Updated: 2024/03/01 10:53:05 by ocussy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ int	ft_verif_path(t_map *map)
 		x++;
 	}
 	if (!ft_check_filled(map->filled))
+	{
+		ft_free_array(map->filled);
 		return (0);
+	}
+	ft_free_array(map->filled);
 	return (1);
 }

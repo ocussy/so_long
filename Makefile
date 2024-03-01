@@ -6,6 +6,7 @@ SRC_FILES = main.c \
 			utils_map.c \
 			utils_map_2.c \
 			utils.c \
+			make_map.c \
 
 OBJECTS = $(patsubst %.c, %.o, $(SRC_FILES))
 INCLUDE = so_long.h

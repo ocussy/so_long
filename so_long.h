@@ -6,7 +6,7 @@
 /*   By: ocussy <ocussy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:20:33 by ocussy            #+#    #+#             */
-/*   Updated: 2024/02/28 18:16:58 by ocussy           ###   ########.fr       */
+/*   Updated: 2024/03/01 16:04:51 by ocussy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,50 @@ typedef struct s_map
 	size_t	len_map;
 	char	**map;
 	char	**filled;
+	int		count;
 }			t_map;
+
+typedef struct s_mlx
+{
+	t_map	*map;
+	void	*ptr;
+	void	*win;
+	void	*grass;
+	void	*tree;
+	void	*tree_apple;
+	void	*apple;
+	void	*bed;
+	void	*rabbit_down;
+	void	*rabbit_up;
+	void	*rabbit_left;
+	void	*rabbit_right;
+	int		width;
+	int		length;
+	size_t	x;
+	int		y;
+}			t_mlx;
 
 // CHECK_MAP
 
 int			ft_error_map(t_map *tab, int i);
-int			ft_size_map(void);
-char		*ft_get_map(int size_map);
+int			ft_size_map(char *file);
+char		*ft_get_map(char *file, int size_map);
 int			ft_verif_map(t_map *map);
-int			ft_map(void);
+t_map		*ft_map(char *file);
 
 // UTILS
 
 t_map		*ft_init(void);
 int			ft_free_tab(t_map *map);
 char		**ft_copy_array(t_map *map);
+int			ft_free_array(char **array);
 
 // UTILS_MAP
 
 int			ft_verif_wall_verti(char **map, size_t len, int size_map);
 int			ft_verif_wall_horiz(char **map, int size_map);
 int			ft_verif_wall(t_map *map);
-int			ft_verif_char(char **map, char c);
+int			ft_verif_char(t_map *map, char c);
 int			ft_verif_size_wall(t_map *map);
 
 // UTILS_MAP_2
@@ -72,5 +94,19 @@ char		*ft_strjoin_gnl(char *s1, char *s2);
 void		ft_bzero_gnl(void *s, size_t n);
 int			ft_strchr_gnl(char *s);
 int			ft_strlen_gnl(char *str);
+
+// MAKE_MAP
+
+void		ft_get_image(t_mlx *mlx);
+void		ft_make_map(t_mlx *mlx);
+void		ft_get_background(t_mlx *mlx);
+
+// MAIN
+
+int			close_window(t_mlx *mlx);
+int			manage_keys(int keycode, t_mlx *mlx);
+int			mouse_hook(int key_hook, t_mlx *mlx);
+int			ft_init_window(t_mlx *mlx);
+int			main(int argc, char **argv);
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ocussy <ocussy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:57:11 by ocussy            #+#    #+#             */
-/*   Updated: 2024/02/28 17:59:12 by ocussy           ###   ########.fr       */
+/*   Updated: 2024/03/01 15:58:17 by ocussy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,20 @@ t_map	*ft_init(void)
 	return (map);
 }
 
+int	ft_free_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+	return (0);
+}
+
 int	ft_free_tab(t_map *map)
 {
 	int	i;
@@ -38,6 +52,7 @@ int	ft_free_tab(t_map *map)
 		i++;
 	}
 	free(map->map);
+	free(map);
 	return (0);
 }
 char	**ft_copy_array(t_map *map)

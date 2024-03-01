@@ -6,7 +6,7 @@
 /*   By: ocussy <ocussy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 18:03:00 by ocussy            #+#    #+#             */
-/*   Updated: 2024/02/28 18:18:15 by ocussy           ###   ########.fr       */
+/*   Updated: 2024/03/01 16:05:08 by ocussy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ int	ft_error_map(t_map *tab, int i)
 	return (0);
 }
 
-int	ft_size_map(void)
+int	ft_size_map(char *file)
 {
 	int		size;
 	int		fd;
 	char	*line;
 
 	size = 0;
-	fd = open("map1.ber", O_RDONLY);
+	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
 		perror("Error opening file");
@@ -60,7 +60,7 @@ int	ft_size_map(void)
 	return (size);
 }
 
-char	*ft_get_map(int size_map)
+char	*ft_get_map(char *file, int size_map)
 {
 	char	*map;
 	char	*map_final;
@@ -68,7 +68,7 @@ char	*ft_get_map(int size_map)
 	int		fd;
 
 	i = 0;
-	fd = open("map1.ber", O_RDONLY);
+	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
 		perror("Error opening file");
@@ -94,26 +94,27 @@ int	ft_verif_map(t_map *map)
 		ft_error_map(map, 1);
 	if (!ft_verif_wall(map))
 		ft_error_map(map, 2);
-	if (!ft_verif_char(map->map, 'E'))
+	if (!ft_verif_char(map, 'E'))
 		ft_error_map(map, 3);
-	if (!ft_verif_char(map->map, 'P'))
+	if (!ft_verif_char(map, 'P'))
 		ft_error_map(map, 4);
-	if (!ft_verif_char(map->map, 'C'))
+	if (!ft_verif_char(map, 'C'))
 		ft_error_map(map, 5);
 	if (!ft_verif_path(map))
 		ft_error_map(map, 6);
 	return (0);
 }
 
-int	ft_map(void)
+t_map	*ft_map(char *file)
 {
 	char	*join_map;
 	t_map	*map;
 
 	map = ft_init();
-	map->size_map = ft_size_map();
-	join_map = ft_get_map(map->size_map);
+	map->size_map = ft_size_map(file);
+	join_map = ft_get_map(file, map->size_map);
 	map->map = ft_split(join_map, '\n');
+	free(join_map);
 	ft_verif_map(map);
-	return (0);
+	return (map);
 }
