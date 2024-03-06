@@ -34,6 +34,13 @@ void	ft_get_image(t_mlx *mlx)
 			"Images/lapinou_right.xpm", &mlx->width, &mlx->length);
 }
 
+void ft_win(t_mlx *mlx)
+{
+	ft_putstr_fd("Une bonne nuit de repos !", 1);
+	close_window(mlx);
+	
+}
+
 void	ft_get_walls(t_mlx *mlx)
 {
 	size_t	x;
@@ -102,12 +109,163 @@ void	ft_get_background(t_mlx *mlx)
 	ft_get_interior(mlx);
 }
 
+void ft_move_up(t_mlx *mlx)
+{	
+	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->rabbit_up, (mlx->j * 100), (mlx->i * 100));
+	if (mlx->map->map[mlx-> i][mlx->j] == 'C')
+	{
+		mlx->map->count--;
+		mlx->map->map[mlx-> i][mlx->j] = '0';
+	}
+	if (mlx->map->map[mlx->i - 1][mlx->j] && mlx->map->map[mlx->i - 1][mlx->j] != '1')
+	{
+		if (mlx->map->map[mlx-> i][mlx->j] == 'E' && mlx->map->count != 0)
+		{
+			ft_putstr_fd("Tu n'as pas encore recolté toutes les pommes !\n", 1);
+			mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->bed, (mlx->j * 100), (mlx->i * 100));
+		}
+		else if (mlx->map->map[mlx-> i][mlx->j] == 'E' && mlx->map->count == 0)
+			ft_win(mlx);
+		else
+			mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->grass, (mlx->j * 100), (mlx->i * 100));
+		mlx->i--;
+		mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->rabbit_up, (mlx->j * 100), (mlx->i * 100));
+	}
+	mlx->move++;
+}
+
+void ft_move_left(t_mlx *mlx)
+{
+	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->rabbit_left, (mlx->j * 100), (mlx->i * 100));
+	if (mlx->map->map[mlx-> i][mlx->j] == 'C')
+	{
+		mlx->map->count--;
+		mlx->map->map[mlx-> i][mlx->j] = '0';
+	}
+	if (mlx->map->map[mlx->i][mlx->j - 1] && mlx->map->map[mlx->i][mlx->j - 1] != '1')
+	{
+		if (mlx->map->map[mlx-> i][mlx->j] == 'E' && mlx->map->count != 0)
+		{
+			ft_putstr_fd("Tu n'as pas encore recolté toutes les pommes !\n", 1);
+			mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->bed, (mlx->j * 100), (mlx->i * 100));
+		}
+		else if (mlx->map->map[mlx-> i][mlx->j] == 'E' && mlx->map->count == 0)
+			ft_win(mlx);
+		else
+			mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->grass, (mlx->j  * 100), (mlx->i * 100));
+		mlx->j--;
+		mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->rabbit_left, (mlx->j * 100), (mlx->i * 100));
+	}
+	mlx->move++;
+}
+
+void ft_move_down(t_mlx *mlx)
+{
+	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->rabbit_down, (mlx->j * 100), (mlx->i * 100));
+	if (mlx->map->map[mlx-> i][mlx->j] == 'C')
+	{
+		mlx->map->count--;
+		mlx->map->map[mlx-> i][mlx->j] = '0';
+	}
+	if (mlx->map->map[mlx->i +1][mlx->j] && mlx->map->map[mlx->i+1][mlx->j] != '1')
+	{
+		if (mlx->map->map[mlx-> i][mlx->j] == 'E' && mlx->map->count != 0)
+		{
+			ft_putstr_fd("Tu n'as pas encore recolté toutes les pommes !\n", 1);
+			mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->bed, (mlx->j * 100), (mlx->i * 100));
+		}
+		else if (mlx->map->map[mlx-> i][mlx->j] == 'E' && mlx->map->count == 0)
+			ft_win(mlx);
+		else
+			mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->grass, (mlx->j * 100), (mlx->i * 100));
+		mlx->i++;
+		mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->rabbit_down, (mlx->j * 100), (mlx->i * 100));
+	}
+	mlx->move++;
+}
+
+void ft_move_right(t_mlx *mlx)
+{
+	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->rabbit_right, (mlx->j* 100), (mlx->i * 100));
+	if (mlx->map->map[mlx-> i][mlx->j] == 'C')
+	{
+		mlx->map->count--;
+		mlx->map->map[mlx-> i][mlx->j] = '0';
+	}
+	if (mlx->map->map[mlx->i][mlx->j+1] && mlx->map->map[mlx->i][mlx->j+1] != '1')
+	{
+		if (mlx->map->map[mlx-> i][mlx->j] == 'E' && mlx->map->count != 0)
+		{
+			ft_putstr_fd("Tu n'as pas encore recolté toutes les pommes !\n", 1);
+			mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->bed, (mlx->j * 100), (mlx->i * 100));
+		}
+		else if (mlx->map->map[mlx-> i][mlx->j] == 'E' && mlx->map->count == 0)
+			ft_win(mlx);
+		else
+			mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->grass, (mlx->j  * 100), (mlx->i * 100));
+		mlx->j++;
+		mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->rabbit_right, (mlx->j * 100), (mlx->i * 100));
+	}
+	mlx->move++;
+}
+
+int	manage_keys(int keycode, t_mlx *mlx)
+{
+	if (keycode == XK_Escape)
+		close_window(mlx);
+	if (keycode == 122)
+		ft_move_up(mlx);
+	if (keycode == 113)
+		ft_move_left(mlx);
+	if (keycode == 115)
+		ft_move_down(mlx);
+	if (keycode == 100)
+		ft_move_right(mlx);
+	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->tree_apple, 100,
+					0);
+	mlx_string_put(mlx->ptr, mlx->win, 0, 10, 50, "Nombre de mouvements :");
+	mlx_string_put(mlx->ptr, mlx->win, 140, 10, 50, ft_itoa(mlx->move));
+	
+	return (0);
+}
+
+void ft_move(t_mlx *mlx)
+{
+	mlx_hook(mlx->win, KeyPress, KeyPressMask, &manage_keys, &mlx);
+}
+
+void ft_find_start(t_map *map, t_mlx *mlx)
+{
+	int i; // lignes
+	int j; // colonnes
+
+	i = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (map->map[i][j] == 'P')
+			{
+				mlx->i = i;
+				mlx->j = j;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 void	ft_make_map(t_mlx *mlx)
 {
 	mlx->width = 100;
 	mlx->length = 100;
 	ft_get_image(mlx);
 	ft_get_background(mlx);
+	mlx->move = 0;
+	mlx_string_put(mlx->ptr, mlx->win, 0, 10, 50, "Nombre de mouvements :");
+	mlx_string_put(mlx->ptr, mlx->win, 140, 10, 50, ft_itoa(mlx->move));
+	ft_find_start(mlx->map, mlx);
 	ft_move(mlx);
 	// mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->tree, 0, 100);
 	// mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->tree_apple, 0, 200);

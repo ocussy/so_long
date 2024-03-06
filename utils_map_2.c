@@ -14,7 +14,7 @@
 
 void	fill(t_map *map, int x, size_t y)
 {
-	if (x < 0 || x >= map->size_map || y < 0 || y >= map->len_map)
+	if (x < 0 || x >= map->size_map || y >= map->len_map)
 		return ;
 	if (map->filled[x][y] == '1')
 		return ;

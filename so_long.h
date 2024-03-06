@@ -22,6 +22,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+#define XK_Z                             0x005a
+
 typedef struct s_map
 {
 	int		size_map;
@@ -29,11 +31,14 @@ typedef struct s_map
 	char	**map;
 	char	**filled;
 	int		count;
+	int		x;
+	size_t 	y;
 }			t_map;
 
 typedef struct s_mlx
 {
-	t_map	*map;
+	t_map	*map
+;
 	void	*ptr;
 	void	*win;
 	void	*grass;
@@ -47,6 +52,11 @@ typedef struct s_mlx
 	void	*rabbit_right;
 	int		width;
 	int		length;
+	int move;
+	int pos_x;
+	size_t pos_y;
+	int i;
+	int j;
 	size_t	x;
 	int		y;
 }			t_mlx;

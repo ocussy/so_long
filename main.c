@@ -39,27 +39,12 @@ int	close_window(t_mlx *mlx)
 	exit(0);
 }
 
-int	manage_keys(int keycode, t_mlx *mlx)
-{
-	if (keycode == XK_Escape)
-		close_window(mlx);
-	return (0);
-}
-
-int	mouse_hook(int key_hook, t_mlx *mlx)
-{
-	if (key_hook == 1)
-		printf("Bonjour !");
-	(void)mlx->tree;
-	return (0);
-}
-
 int	ft_init_window(t_mlx *mlx)
 {
 	mlx->y = (mlx->map->size_map * 100);
 	mlx->x = (mlx->map->len_map * 100);
-	if (mlx->x > 2500 || mlx->y > 1400)
-		return (1);
+	// if (mlx->x > 2500 || mlx->y > 1400)
+	// 	return (1);
 	mlx->ptr = mlx_init();
 	if (mlx->ptr == NULL)
 		return (1);
@@ -88,13 +73,11 @@ int	main(int argc, char **argv)
 		if (ft_init_window(&mlx) == 1)
 		{
 			ft_free_tab(mlx.map);
-			free(mlx.map);
 			return (1);
 		}
 		ft_make_map(&mlx);
 		mlx_hook(mlx.win, KeyPress, KeyPressMask, &manage_keys, &mlx);
 		mlx_hook(mlx.win, DestroyNotify, ButtonPressMask, &close_window, &mlx);
-		mlx_mouse_hook(mlx.win, mouse_hook, &mlx);
 		mlx_loop(mlx.ptr);
 		return (0);
 	}
