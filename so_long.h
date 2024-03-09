@@ -6,7 +6,7 @@
 /*   By: ocussy <ocussy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:20:33 by ocussy            #+#    #+#             */
-/*   Updated: 2024/03/01 16:04:51 by ocussy           ###   ########.fr       */
+/*   Updated: 2024/03/06 12:06:33 by ocussy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-#define XK_Z                             0x005a
+# define XK_Z 0x005a
 
 typedef struct s_map
 {
@@ -32,13 +32,12 @@ typedef struct s_map
 	char	**filled;
 	int		count;
 	int		x;
-	size_t 	y;
+	size_t	y;
 }			t_map;
 
 typedef struct s_mlx
 {
-	t_map	*map
-;
+	t_map	*map;
 	void	*ptr;
 	void	*win;
 	void	*grass;
@@ -52,11 +51,11 @@ typedef struct s_mlx
 	void	*rabbit_right;
 	int		width;
 	int		length;
-	int move;
-	int pos_x;
-	size_t pos_y;
-	int i;
-	int j;
+	int		move;
+	int		pos_x;
+	size_t	pos_y;
+	int		i;
+	int		j;
 	size_t	x;
 	int		y;
 }			t_mlx;
@@ -107,7 +106,7 @@ int			ft_strlen_gnl(char *str);
 
 // MAKE_MAP
 
-void		ft_get_image(t_mlx *mlx);
+int			ft_get_image(t_mlx *mlx);
 void		ft_make_map(t_mlx *mlx);
 void		ft_get_background(t_mlx *mlx);
 

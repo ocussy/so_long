@@ -14,7 +14,7 @@ CC = cc
 FLAGS = -Wall -Wextra -Werror -O3 -g3
 LIBFT_PATH = libft/
 LIBFT = $(LIBFT_PATH)libft.a
-MLX_INCLUDE = -Lmlx -lmlx -lXext -lX11
+MLX_INCLUDE = -L/usr/lib/X11 -lXext -lX11 libmlx.a
 
 all: $(NAME)
 
@@ -23,7 +23,7 @@ $(NAME): $(OBJECTS)
 	@$(CC) $(FLAGS) $(OBJECTS) $(LIBFT) $(MLX_INCLUDE) -o $(NAME)
 
 %.o: %.c $(INCLUDE)
-	$(CC) $(FLAGS) -I$(LIBFT_PATH) -I. -c $< -o $@
+	$(CC) $(FLAGS) -I$(LIBFT_PATH) -Imlx.h -c $< -o $@
 
 clean:
 	@make clean -C $(LIBFT_PATH)

@@ -6,7 +6,7 @@
 /*   By: ocussy <ocussy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:57:26 by ocussy            #+#    #+#             */
-/*   Updated: 2024/03/01 16:03:50 by ocussy           ###   ########.fr       */
+/*   Updated: 2024/03/06 12:15:27 by ocussy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	close_window(t_mlx *mlx)
 
 int	ft_init_window(t_mlx *mlx)
 {
-	mlx->y = (mlx->map->size_map * 100);
-	mlx->x = (mlx->map->len_map * 100);
+	mlx->y = (mlx->map->size_map * 50);
+	mlx->x = (mlx->map->len_map * 50);
 	// if (mlx->x > 2500 || mlx->y > 1400)
 	// 	return (1);
 	mlx->ptr = mlx_init();
@@ -57,6 +57,10 @@ int	ft_init_window(t_mlx *mlx)
 	return (0);
 }
 
+// verifier truc qunad on trouve pas image
+// verifier leak
+// faire le lit
+
 int	main(int argc, char **argv)
 {
 	t_mlx	mlx;
@@ -69,12 +73,8 @@ int	main(int argc, char **argv)
 	else
 	{
 		mlx.map = ft_map(argv[1]);
-		printf("Il y a %d pommes\n", mlx.map->count);
-		if (ft_init_window(&mlx) == 1)
-		{
-			ft_free_tab(mlx.map);
-			return (1);
-		}
+		if (!mlx.map)
+			return (0);
 		ft_make_map(&mlx);
 		mlx_hook(mlx.win, KeyPress, KeyPressMask, &manage_keys, &mlx);
 		mlx_hook(mlx.win, DestroyNotify, ButtonPressMask, &close_window, &mlx);

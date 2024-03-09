@@ -6,7 +6,7 @@
 /*   By: ocussy <ocussy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 18:03:00 by ocussy            #+#    #+#             */
-/*   Updated: 2024/03/01 16:05:08 by ocussy           ###   ########.fr       */
+/*   Updated: 2024/03/06 11:40:20 by ocussy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_size_map(char *file)
 	if (fd == -1)
 	{
 		perror("Error opening file");
-		return (1);
+		return (0);
 	}
 	line = get_next_line(fd);
 	if (line == NULL)
@@ -105,13 +105,34 @@ int	ft_verif_map(t_map *map)
 	return (0);
 }
 
+int	ft_verif_file(char *file)
+{
+	int	len;
+
+	len = ft_strlen(file);
+	len = len - 4;
+	if (ft_strncmp(file + len, ".ber", 4) != 0)
+		return (0);
+	return (1);
+}
+
 t_map	*ft_map(char *file)
 {
 	char	*join_map;
 	t_map	*map;
 
 	map = ft_init();
+	if (ft_verif_file(file) == 0)
+	{
+		free(map);
+		return (0);
+	}
 	map->size_map = ft_size_map(file);
+	if (map->size_map == 0)
+	{
+		free(map);
+		return (0);
+	}
 	join_map = ft_get_map(file, map->size_map);
 	map->map = ft_split(join_map, '\n');
 	free(join_map);
