@@ -1,13 +1,18 @@
 NAME = so_long
-SRC_FILES = main.c \
+SRC_FILES = check_map.c \
+            check_map_2.c \
+            check_position.c \
+            get_background.c \
+            get_image.c \
             get_next_line.c \
             get_next_line_utils.c \
-            check_map.c \
+            main.c \
+            make_map.c \
+            make_map_2.c \
             utils_map.c \
             utils_map_2.c \
             utils.c \
-            make_map.c
-
+            
 OBJECTS = $(patsubst %.c, %.o, $(SRC_FILES))
 INCLUDE = so_long.h
 CC = cc 

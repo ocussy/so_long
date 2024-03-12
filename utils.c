@@ -6,7 +6,7 @@
 /*   By: ocussy <ocussy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:57:11 by ocussy            #+#    #+#             */
-/*   Updated: 2024/03/01 15:58:17 by ocussy           ###   ########.fr       */
+/*   Updated: 2024/03/11 11:56:59 by ocussy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,11 @@ int	ft_free_tab(t_map *map)
 	free(map);
 	return (0);
 }
+
 char	**ft_copy_array(t_map *map)
 {
-	char **filled;
-	int i;
+	char	**filled;
+	int		i;
 
 	i = 0;
 	filled = malloc(sizeof(char *) * (map->size_map + 1));
